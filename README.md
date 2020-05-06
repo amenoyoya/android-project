@@ -8,6 +8,7 @@ Android App Development with NativeScript
     - Windows 10
 - CLI:
     - Bash on Windows
+    - PowerShell
 - Node.js: 12.14.1
     - Yarn: 1.21.1
 
@@ -32,6 +33,7 @@ $ cd app
 $ yarn install
 
 # NativeScript で preview 実行
+## Bash on Windows では上手くQRコードを表示できないことがあるため、その場合は PowerShell で実行する
 $ tns preview
 ## => 生成するQRコードをAndroidスマホでスキャン
 ## => NativeScript Playground で実行される
