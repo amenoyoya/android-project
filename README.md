@@ -100,7 +100,7 @@ Execute following commands in PowerShell (Administration)
 - Launch BlueStacks
     - Setting > Advanced:
         - Android Debug Bridge: `ON`
-            - ![bluestacks_setting.drawio.png](./img/bluestacks_setting.drawio.png)
+            - ![bluestacks_settings.drawio.png](./img/bluestacks_settings.drawio.png)
         - => Save
     - Restart BlueStacks
     - Setting > Advanced:
@@ -183,3 +183,93 @@ Starting: Intent { act=android.intent.action.MAIN cmp=rust.helloworld/android.ap
 --------- beginning of system
 11-28 01:40:42.522  4189  4211 I RustStdoutStderr: hello world
 ```
+
+***
+
+# Capacitor x Ionic Web Hybrid App
+
+- **Capacitor**:
+    - Ionic社が開発した、Webアプリケーションをクロスプラットフォームに展開するためのフレームワーク
+    - 2009年にリリースされた Apache Cordova (旧 PhoneGap) を代替するために開発された最新フレームワーク
+- **Ionic Framework**:
+    - Ionic社が開発したオープンソースのUIツールキット
+    - Angular や React, Vue といった人気フレームワークと併用することで、高性能で高品質なモバイルアプリやデスクトップアプリを作ることが可能
+
+## Environment:
+- OS: Windows 10
+    - Shell: PowerShell
+- Editor: VSCode
+- Node.js: `>= 12.x`
+    - Npm package manager
+    - Yarn package manager
+
+### Setup
+```powershell
+# install latest ionic-cli
+> yarn global add ionic-cli
+
+# create ionic + react project: `hello-ionic`
+## template:
+## - blank: blank starter project
+## - list: starter project with list
+## - my-first-app: sample application with gallery + camera
+## - sidemenu: starter project with side menu
+## - tabs: starter project with tabs
+## - conference: sample application with all ionic kitchen sink
+> ionic start hello-ionic blank --type=react --capacitor
+> cd hello-ionic
+
+# --- following commands are executed when ionic start ---
+# # install capacitor modules
+# > yarn add @capacitor/core @capacitor/cli
+
+# # initialize capacitor project
+# > npx cap init
+
+# ? Name: # <= hello-capacitor
+# ? Package ID: # <= com.hello.capacitor
+# ? Web asset directory: # <= www
+# ? Create free Ionic account: # <= n
+# ? Share anonymous usage data: # <= n
+
+# build project before adding platforms
+> ionic build
+
+# install android platform for capacitor
+> yarn add @capacitor/android
+> npx cap add android
+
+# install desktop platform (electron) for capacitor
+> yarn add @capacitor-community/electron
+> npx cap add @capacitor-community/electron
+```
+
+### Electron App
+```powershell
+# execute ionic app in electron
+> npm run electron:start --prefix electron
+```
+
+![ionic-electron.png](./img/ionic-electron.png)
+
+### Android App
+予め Android エミュレータとして BlueStacks 5 を起動して、ADB を有効化＆ポート番号をメモしておく
+
+```powershell
+# connect to BlueStacks android debug bridge
+# * floowing is example for the case if the BlueStacks is launching in 127.0.0.1:65511
+> adb connect 127.0.0.1:65511
+
+# confirm current connected devices
+> adb devices
+
+List of devices attached
+127.0.0.1:65511 device
+
+# execute ionic app in android emulator
+> npx cap run android
+
+? Please choose a target device: # <= samsung SCG02 (127.0.0.1:65511)
+```
+
+![ionic-bluestacks.png](./img/ionic-bluestacks.png)
