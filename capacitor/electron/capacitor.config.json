@@ -1,0 +1,6 @@
+{
+  "appId": "app.simple.hello.capacitor",
+  "appName": "hello-capacitor",
+  "webDir": "www",
+  "bundledWebRuntime": true
+}

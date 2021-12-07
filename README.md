@@ -273,3 +273,123 @@ List of devices attached
 ```
 
 ![ionic-bluestacks.png](./img/ionic-bluestacks.png)
+
+***
+
+## Capacitor App from scratch
+
+### Setup
+```powershell
+# create project: `capacitor`
+> mkdir capacitor
+> cd capacitor
+
+# create package.json
+> yarn init
+
+# install capacitor modules
+> yarn add @capacitor/core @capacitor/cli
+
+# initialize capacitor project
+## application name: `hello-capacitor`
+## package ID: `com.simple.hello.capacitor`
+## web directory: `www`
+> npx cap init hello-capacitor com.simple.hello.capacitor --web-dir www
+```
+
+### Project Structure
+```bash
+capacitor/
+|_ www/
+|  |_ assets/
+|  |  |_ js/
+|  |     |_ capacitor.js # copy from node_modules/@capacitor/core/dist/index.js
+|  |
+|  |_ index.html # main screen HTML file
+|
+|_ capacitor.config.json # capacitor configuration file
+|_ package.json
+```
+
+#### www/index.html
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Capacitor</title>
+</head>
+<body>
+    <h1>Hello Capacitor</h1>
+    <button onclick="getCapacitorPlatform()">Get Platform</button>
+    <dl style="display: flex;">
+        <dt>Current Platform：</dt>
+        <dd id="platform" style="color: red;"></dd>
+    </dl>
+  
+    <script type="module">
+        import { Capacitor } from '/assets/js/capacitor.js';
+    
+        function getCapacitorPlatform() {
+            document.getElementById('platform').innerText = Capacitor.getPlatform();
+        }
+
+        window.getCapacitorPlatform = getCapacitorPlatform;
+    </script>
+</body>
+</html>
+```
+
+### Add platforms
+```powershell
+# add android platform
+> yarn add @capacitor/android
+> npx cap add android
+
+# add electron platform
+> yarn add @capacitor-community/electron
+> npx cap add @capacitor-community/electron
+
+# install watch-cli for watching source files
+> yarn add -D watch-cli
+```
+
+#### package.json: Setup npm-scripts
+```json
+{
+    // ...
+    "scripts": {
+        // www ディレクトリの変更を検知して android 用プロジェクトにソースファイルを同期するスクリプト
+        "watch:android": "watch -p \"www/**/*\" -c \"cap sync android\"",
+
+        // www ディレクトリの変更を検知して electron 用プロジェクトにソースファイルを同期するスクリプト
+        "watch:electron": "watch -p \"www/**/*\" -c \"cap sync @capacitor-community/electron\""
+    }
+}
+```
+
+### Execute on Electron
+```powershell
+# start watching and syncing of source files
+> npm run watch:electron
+
+# launch electron application in live-mode
+> npm run electron:start-live --prefix electron
+```
+
+![simple-capacitor-electron.png](./img/simple-capacitor-electron.png)
+
+### Execute on Android
+```powershell
+# start watching and syncing of source files
+> npm run watch:android
+
+# launch android emulator
+## * 127.0.0.1:63078 must be changed to ip:port of your BlueStacks 5
+> adb connect 127.0.0.1:63078
+> npx cap run android
+```
+
+![simple-capacitor-android.png](./img/simple-capacitor-android.png)

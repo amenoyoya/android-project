@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@capacitor-community/electron": "^4.0.3",
+    "@capacitor/android": "^3.3.2",
+    "@capacitor/cli": "^3.3.2",
+    "@capacitor/core": "^3.3.2"
+  },
+  "devDependencies": {
+    "watch-cli": "^0.2.3"
+  },
+  "scripts": {
+    "watch:android": "watch -p \"www/**/*\" -c \"cap sync android\"",
+    "watch:electron": "watch -p \"www/**/*\" -c \"cap sync @capacitor-community/electron\""
+  }
+}
