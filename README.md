@@ -393,3 +393,11 @@ capacitor/
 ```
 
 ![simple-capacitor-android.png](./img/simple-capacitor-android.png)
+
+***
+
+## Capacitor + Snowpack
+
+Capacitor および Capacitor Filesystem プラグインを Snowpack とともに使って、それなりに実用的なアプリケーションを作成する方法
+
+[Document](./snowpack/README.md)

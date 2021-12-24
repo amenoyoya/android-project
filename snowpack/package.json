@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@capacitor/cli": "^3.3.3",
+    "alpinejs": "^3.7.1",
+    "snowpack": "^3.8.8"
+  },
+  "dependencies": {
+    "@capacitor/android": "^3.3.3",
+    "@capacitor/core": "^3.3.3",
+    "@capacitor/filesystem": "^1.0.6",
+    "install": "^0.13.0"
+  }
+}
